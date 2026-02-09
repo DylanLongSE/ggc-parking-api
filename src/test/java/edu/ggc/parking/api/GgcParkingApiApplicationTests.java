@@ -1,0 +1,13 @@
+package edu.ggc.parking.api;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class GgcParkingApiApplicationTests {
+
+    @Test
+    void contextLoads() {
+    }
+
+}
