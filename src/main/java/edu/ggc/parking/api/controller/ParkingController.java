@@ -14,12 +14,13 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @RestController
 @RequestMapping("/api/v1/lots")
+@CrossOrigin(origins = "*")
 public class ParkingController {
 
     private final Map<String, LatestSnapshot> latestByLot = new ConcurrentHashMap<>();
 
     /**
-     * Endpoint for devices to post count updates for a specific parking lot.
+     * Endpoint for Raspberry Pi 5 to post count updates for a specific parking lot.
      *
      * @param lotId the ID of the parking lot
      * @param body  the count update request containing car count and optional timestamp
@@ -33,7 +34,7 @@ public class ParkingController {
     }
 
     /**
-     * Endpoint for clients to query the current status of a parking lot.
+     * Endpoint for UI client to query the current status of a parking lot.
      *
      * @param lotId the ID of the parking lot
      * @return the current parking status including car count and timestamp

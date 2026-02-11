@@ -2,16 +2,16 @@ name: CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
 
 jobs:
-  build-test:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Java 17
@@ -21,8 +21,12 @@ jobs:
           java-version: "17"
           cache: maven
 
-      - name: Build and test
-        run: mvn -B test
+      - name: Build and run tests
+        run: mvn -B clean verify
 
-      - name: Package
-        run: mvn -B package -DskipTests
+      - name: Upload test reports (if failed)
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-reports
+          path: target/surefire-reports/
