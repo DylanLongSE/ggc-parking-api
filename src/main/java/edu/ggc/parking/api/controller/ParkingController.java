@@ -14,7 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @RestController
 @RequestMapping("/api/v1/lots")
-@CrossOrigin(origins = "*")
 public class ParkingController {
 
     private final Map<String, LatestSnapshot> latestByLot = new ConcurrentHashMap<>();
