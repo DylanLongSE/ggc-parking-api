@@ -1,4 +1,4 @@
-package edu.ggc.parking.api.config;
+package com.example.parking.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
@@ -11,7 +11,10 @@ public class CorsConfig implements WebMvcConfigurer {
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/api/**")
                 .allowedOrigins(
-                        "http://localhost:5500"
+                        "http://localhost:5500",
+                        "http://127.0.0.1:5500",
+                        "http://localhost:8000",
+                        "http://127.0.0.1:8000"
                 )
                 .allowedMethods("*")
                 .allowedHeaders("*");

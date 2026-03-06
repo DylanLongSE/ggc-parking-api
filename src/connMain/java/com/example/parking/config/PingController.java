@@ -1,4 +1,4 @@
-package edu.ggc.parking.api.controller;
+package com.example.parking.config;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
