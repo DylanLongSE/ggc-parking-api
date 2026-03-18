@@ -4,7 +4,6 @@ COPY .mvn .mvn
 COPY mvnw pom.xml ./
 RUN ./mvnw dependency:go-offline -B
 COPY src src
-COPY application.yml .
 RUN ./mvnw clean package -DskipTests -B
 
 FROM eclipse-temurin:17-jre
