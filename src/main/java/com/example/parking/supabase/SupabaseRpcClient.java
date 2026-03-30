@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
+import java.time.Instant;
 import java.util.Map;
 
 @Component
@@ -38,7 +39,8 @@ public class SupabaseRpcClient {
         // Params must match function arg names
         Map<String, Object> body = Map.of(
                 "p_lot_id", lotId,
-                "p_occupied", occupied
+                "p_occupied", occupied,
+                "p_timestamp", Instant.now().toString()
         );
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
