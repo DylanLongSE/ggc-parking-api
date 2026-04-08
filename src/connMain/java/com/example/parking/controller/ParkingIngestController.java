@@ -43,6 +43,6 @@ public class ParkingIngestController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "occupied must be >= 0");
         }
 
-        return ingestService.ingest(lotId, body.getOccupied());
+        return ingestService.ingest(lotId, body.getOccupied(), body.getTimestamp(), body.getReason(), body.getOccupiedIds() );
     }
 }
