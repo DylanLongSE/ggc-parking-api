@@ -18,7 +18,7 @@ public class IngestService {
     }
 
     public IngestResponse ingest(String lotId, int occupied, Instant timestamp, String reason, List<Integer> occupiedIds) {
-        UpsertResult result = supabaseRpcClient.upsertLotCountIfChanged(lotId, occupied); //add other fields if I want them to be stored in Supabase, will have to change RPC function
+        UpsertResult result = supabaseRpcClient.upsertLotCountIfChanged(lotId, occupied, occupiedIds, reason);
 
         return new IngestResponse(
                 result.getLotId(),
