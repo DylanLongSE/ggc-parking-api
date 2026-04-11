@@ -8,6 +8,8 @@ import org.springframework.web.client.RestClientResponseException;
 import org.springframework.web.client.RestTemplate;
 
 import java.time.Instant;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @Component
@@ -27,7 +29,7 @@ public class SupabaseRpcClient {
         this.secretKey = secretKey;
     }
 
-    public UpsertResult upsertLotCountIfChanged(String lotId, int occupied) {
+    public UpsertResult upsertLotCountIfChanged(String lotId, int occupied, List<Integer> occupiedIds, String reason) {
         String url = supabaseUrl + "/rest/v1/rpc/upsert_lot_count_if_changed";
 
         HttpHeaders headers = new HttpHeaders();
@@ -36,12 +38,13 @@ public class SupabaseRpcClient {
         headers.set("apikey", secretKey);
         headers.setBearerAuth(secretKey);
 
-        // Params must match function arg names
-        Map<String, Object> body = Map.of(
-                "p_lot_id", lotId,
-                "p_occupied", occupied,
-                "p_timestamp", Instant.now().toString()
-        );
+        // Using HashMap because occupiedIds and reason can be null
+        Map<String, Object> body = new HashMap<>();
+        body.put("p_lot_id", lotId);
+        body.put("p_occupied", occupied);
+        body.put("p_timestamp", Instant.now().toString());
+        body.put("p_occupied_ids", occupiedIds);
+        body.put("p_reason", reason);
 
         HttpEntity<Map<String, Object>> entity = new HttpEntity<>(body, headers);
 
